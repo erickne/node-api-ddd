@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "npx husky install",
     "test": "jest --passWithNoTests --watch",
     "test:staged" : "jest --passWithNoTests"
   },
