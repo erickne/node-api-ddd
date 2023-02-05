@@ -1,8 +1,6 @@
 import { SignUpController } from './signup'
-import { InvalidParamError, MissingParamError, ServerError } from '../errors'
-import { type EmailValidator } from '../protocols'
-import { type AddAccount, type AddAccountModel } from '../../domain/usecases/add-account'
-import { type AccountModel } from '../../domain/models/account'
+import { InvalidParamError, MissingParamError, ServerError } from '../../errors'
+import { type AccountModel, type AddAccount, type AddAccountModel, type EmailValidator } from './signup-protocols'
 
 interface SutTypes {
   sut: SignUpController
@@ -46,7 +44,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('SignUp Controller', () => {
+describe('signup Controller', () => {
   test('Should return 400 if no name if provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
