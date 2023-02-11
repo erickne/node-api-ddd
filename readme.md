@@ -1,9 +1,5 @@
 # **Clean Node API**
 
-[![alt text](./public/img/logo-course.png "Link para o treinamento")](https://www.udemy.com/course/tdd-com-mango/?referralCode=B53CE5CA2B9AFA5A6FA1)
-
-## [**Link para a documentação da API**](http://fordevs.herokuapp.com/api-docs)
-
 > ## APIs construídas no treinamento
 
 1. [Cadastro](./requirements/signup.md)
