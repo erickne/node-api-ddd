@@ -38,7 +38,7 @@
     "@shelf/jest-mongodb": "^4.1.6",
     "@types/mongodb": "^4.0.7",
     "bcrypt": "^5.1.0",
-    "mongodb": "^5.0.1",
+    "mongodb": "^3.1.5",
     "validator": "^13.9.0"
   }
 }

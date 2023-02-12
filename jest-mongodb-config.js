@@ -1,4 +1,7 @@
 module.exports = {
+  mongodbMemoryServer: {
+    version: 'latest'
+  },
   mongodbMemoryServerOptions: {
     binary: {
       version: '4.0.3',
