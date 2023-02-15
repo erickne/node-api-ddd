@@ -5,15 +5,17 @@ export const MongoHelper = {
   uri: null as unknown as string,
 
   async connect (uri: string): Promise<void> {
-    this.uri = uri
-    this.client = await MongoClient.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+    if (!this.client?.isConnected()) {
+      this.uri = uri
+      this.client = await MongoClient.connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      })
+    }
     await this.client.db()
   },
 
-  async disconnect () {
+  async disconnect (): Promise<void> {
     await this.client.close()
     this.client = null
   },

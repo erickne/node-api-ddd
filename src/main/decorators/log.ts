@@ -14,7 +14,7 @@ export class LogControllerDecorator implements Controller {
     const httpResponse = await this.controller.handle(httpRequest)
     if (httpResponse.statusCode === 500) {
       // noinspection ES6MissingAwait
-      void this.logErrorRepository.log(httpResponse.body.stack)
+      void this.logErrorRepository.logError(httpResponse.body.stack)
     }
     return httpResponse
   }
