@@ -5,6 +5,9 @@ import { LogMongoRepository } from './log'
 describe('Log Mongo Repository', () => {
   let errorCollection: Collection
 
+  const makeSut = (): LogMongoRepository => {
+    return new LogMongoRepository()
+  }
   beforeAll(async () => {
     // @ts-expect-error error no typescript
     await MongoHelper.connect(process.env.MONGO_URL)
@@ -19,7 +22,7 @@ describe('Log Mongo Repository', () => {
   })
 
   test('Should create an error log on success', async () => {
-    const sut = new LogMongoRepository()
+    const sut = makeSut()
     await sut.logError('any_error')
     const count = await errorCollection.countDocuments()
     expect(count).toBe(1)
