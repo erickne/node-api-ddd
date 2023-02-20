@@ -5,7 +5,7 @@ import {
   type HttpRequest,
   type HttpResponse
 } from './login-protocols'
-import { badRequest, serverError, unauthorizedError } from '../../helpers/http-helpers'
+import { badRequest, ok, serverError, unauthorizedError } from '../../helpers/http-helpers'
 import { InvalidParamError, MissingParamError } from '../../errors'
 
 export class LoginController implements Controller {
@@ -35,7 +35,7 @@ export class LoginController implements Controller {
       if (!accessToken) {
         return unauthorizedError()
       }
-      return badRequest(new MissingParamError('password'))
+      return ok({ accessToken })
     } catch (error) {
       return serverError(error)
     }
