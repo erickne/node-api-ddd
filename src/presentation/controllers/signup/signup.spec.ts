@@ -7,7 +7,7 @@ import {
   type HttpRequest,
   type Validation
 } from './signup-protocols'
-import { badRequest } from '../../helpers/http-helpers'
+import { badRequest } from '../../helpers/http/http-helpers'
 
 interface SutTypes {
   sut: SignUpController
