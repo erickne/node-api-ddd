@@ -2,9 +2,9 @@ import { DbAuthentication } from './db-authentication'
 import {
   type AccountModel,
   type AuthenticationModel,
+  type Encrypter,
   type HashComparer,
   type LoadAccountByEmailRepository,
-  type TokenGenerator,
   type UpdateAccessTokenRepository
 } from './db-authentication-protocols'
 
@@ -33,8 +33,8 @@ const makeHashComparer = (): HashComparer => {
 
   return new HashComparerStub()
 }
-const makeTokenGenerator = (): TokenGenerator => {
-  class TokenGeneratorStub implements TokenGenerator {
+const makeTokenGenerator = (): Encrypter => {
+  class TokenGeneratorStub implements Encrypter {
     async generate (id: string): Promise<string> {
       return await new Promise(resolve => { resolve('any_token') })
     }
@@ -60,7 +60,7 @@ interface SutTypes {
   sut: DbAuthentication
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   hashCompareStub: HashComparer
-  tokenGeneratorStub: TokenGenerator
+  tokenGeneratorStub: Encrypter
   updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
 }
 
