@@ -10,15 +10,15 @@ services:
       - "27017:27017"
   api:
     container_name: api-container
-    image: node:16
+    image: nodeapi
     working_dir: /usr/src/server
     restart: always
-    command: bash -c "npm install --only=prod && npm run debug"
+    command: bash -c "npm install --only=prod && npm run start"
     environment:
       - MONGO_URL=mongodb://mongo:27017/clean-node-api
     volumes:
-      - ./dist/:/src/server/dist/
-      - ./package.json:/usr/src/package.json
+      - ./dist/:/usr/src/server/dist/
+      - ./package.json:/usr/src/server/package.json
     ports:
       - "5050:5050"
       - "9222:9222"
