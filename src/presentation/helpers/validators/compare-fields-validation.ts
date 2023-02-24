@@ -2,13 +2,10 @@ import { type Validation } from '../../protocols/validation'
 import { InvalidParamError } from '../../errors'
 
 export class CompareFieldsValidation implements Validation {
-  private readonly fieldName: string
-  private readonly fieldToCompareName: string
-
-  constructor (fieldName: string, fieldToCompareName: string) {
-    this.fieldName = fieldName
-    this.fieldToCompareName = fieldToCompareName
-  }
+  constructor (
+    private readonly fieldName: string,
+    private readonly fieldToCompareName: string
+  ) {}
 
   // @ts-expect-error
   validate (input: any): Error {

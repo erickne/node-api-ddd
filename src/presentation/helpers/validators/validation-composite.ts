@@ -1,11 +1,7 @@
 import { type Validation } from '../../protocols/validation'
 
 export class ValidationComposite implements Validation {
-  private readonly validations: Validation[]
-
-  constructor (validations: Validation[]) {
-    this.validations = validations
-  }
+  constructor (private readonly validations: Validation[]) {}
 
   // @ts-expect-error
   validate (input: any): Error {
