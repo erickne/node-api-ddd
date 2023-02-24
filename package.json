@@ -6,7 +6,7 @@
   "scripts": {
     "db:start": "sudo mongod --dbpath ~/data/db --config /etc/mongod.conf",
     "start": "node dist/main/server.js",
-    "build": "rm -rf && tsc",
+    "build": "rm -rf build/ && tsc",
     "dev": "sucrase-node src/main/server.ts",
     "prepare": "npx husky install",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
@@ -53,6 +53,6 @@
     "validator": "^13.9.0"
   },
   "engines": {
-    "node": "12.x"
+    "node": "16.x"
   }
 }
