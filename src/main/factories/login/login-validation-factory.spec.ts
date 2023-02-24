@@ -1,7 +1,7 @@
 import { EmailValidation, RequiredFieldValidation, ValidationComposite } from '../../../presentation/helpers/validators'
 import { type Validation } from '../../../presentation/protocols/validation'
 import { type EmailValidator } from '../../../presentation/protocols'
-import { makeLoginValidation } from './login-validation'
+import { makeLoginValidation } from './login-validation-factory'
 
 jest.mock('../../../presentation/helpers/validators/validation-composite')
 
