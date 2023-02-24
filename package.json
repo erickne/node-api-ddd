@@ -7,7 +7,7 @@
     "db:start": "sudo mongod --dbpath ~/data/db --config /etc/mongod.conf",
     "start": "node dist/main/server.js",
     "build": "rm -rf build/ && tsc",
-    "up": "npm run build && docker-compose up -d",
+    "up": "npm run build && docker-compose up",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",
     "down": "docker-compose down",
     "prepare": "npx husky install",
@@ -52,6 +52,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.1.5",
+    "nodemon": "^2.0.20",
     "validator": "^13.9.0"
   },
   "engines": {
