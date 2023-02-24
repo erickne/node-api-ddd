@@ -2,7 +2,7 @@ import request from 'supertest'
 import app from '../config/app'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 
-describe('SignUp Routes', () => {
+describe('Login Routes', () => {
   beforeAll(async () => {
     // @ts-expect-error error no typescript
     await MongoHelper.connect(process.env.MONGO_URL)
@@ -13,18 +13,20 @@ describe('SignUp Routes', () => {
 
   beforeEach(async () => {
     const accountCollection = await MongoHelper.getCollection('accounts')
-    accountCollection.deleteMany({})
+    await accountCollection.deleteMany({})
   })
 
-  test('Should return and account on success', async () => {
-    await request(app)
-      .post('/api/signup')
-      .send({
-        name: 'erick',
-        email: 'erick@teste.com',
-        password: 'erick123',
-        passwordConfirmation: 'erick123'
-      })
-      .expect(200)
+  describe('POST / signup', () => {
+    test('Should return 200 on signup', async () => {
+      await request(app)
+        .post('/api/signup')
+        .send({
+          name: 'erick',
+          email: 'erick@teste.com',
+          password: 'erick123',
+          passwordConfirmation: 'erick123'
+        })
+        .expect(200)
+    })
   })
 })
