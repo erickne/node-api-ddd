@@ -7,7 +7,7 @@
     "db:start": "sudo mongod --dbpath ~/data/db --config /etc/mongod.conf",
     "start": "node dist/main/server.js",
     "build": "rm -rf build/ && tsc",
-    "up": "npm run build && docker-compose up",
+    "up": "npm run build && docker-compose up -d",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js",
     "down": "docker-compose down",
     "prepare": "npx husky install",
