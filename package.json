@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "sucrase-node src/main/server.ts",
+    "db:start": "sudo mongod --dbpath ~/data/db --config /etc/mongod.conf",
+    "start": "node dist/main/server.js",
+    "build": "rm -rf && tsc",
+    "dev": "sucrase-node src/main/server.ts",
     "prepare": "npx husky install",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
@@ -45,7 +48,6 @@
     "@types/mongodb": "^4.0.7",
     "bcrypt": "^5.1.0",
     "express": "^4.18.2",
-    "fast-glob": "^3.2.12",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.1.5",
     "validator": "^13.9.0"
