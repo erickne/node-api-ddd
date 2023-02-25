@@ -5,6 +5,7 @@ import {
   type AddAccountRepository,
   type Hasher
 } from './db-add-account-protocols'
+import { AccountMongoRepository } from '../../../infra/db/mongodb/account/account-mongo-repository'
 
 interface SutTypes {
   sut: DbAddAccount
@@ -39,7 +40,8 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 const makeSut = (): SutTypes => {
   const encrypterStub = makeEncrypter()
   const addAccountRepositoryStub = makeAddAccountRepository()
-  const sut = new DbAddAccount(encrypterStub, addAccountRepositoryStub)
+  const accountMongoRepositoryStub = new AccountMongoRepository()
+  const sut = new DbAddAccount(encrypterStub, addAccountRepositoryStub, accountMongoRepositoryStub)
   return {
     sut,
     encrypterStub,

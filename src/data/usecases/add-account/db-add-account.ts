@@ -5,11 +5,13 @@ import {
   type AddAccountRepository,
   type Hasher
 } from './db-add-account-protocols'
+import { type AccountMongoRepository } from '../../../infra/db/mongodb/account/account-mongo-repository'
 
 export class DbAddAccount implements AddAccount {
   constructor (
     private readonly encrypter: Hasher,
-    private readonly addAccountRepository: AddAccountRepository
+    private readonly addAccountRepository: AddAccountRepository,
+    private readonly accountMongoRepository: AccountMongoRepository
   ) {}
 
   async add (accountData: AddAccountModel): Promise<AccountModel> {
