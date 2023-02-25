@@ -9,7 +9,7 @@ import {
   type HttpRequest,
   type Validation
 } from './signup-controller-protocols'
-import { badRequest } from '../../helpers/http/http-helpers'
+import { badRequest, ok } from '../../helpers/http/http-helpers'
 
 interface SutTypes {
   sut: SignUpController
@@ -111,22 +111,9 @@ describe('signup Controller', () => {
   })
   test('Should return 200 if valid data is provided', async () => {
     const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        name: 'valid_name',
-        email: 'valid_email@email.com',
-        password: 'valid_password',
-        passwordConfirmation: 'valid_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse.statusCode).toBe(200)
-    expect(httpResponse.body).toEqual({
-      id: 'valid_id',
-      name: 'valid_name',
-      email: 'valid_email@email.com',
-      password: 'valid_password'
-    })
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
   test('Should return 400 if validator return an error', async () => {
     const { sut, validationStub } = makeSut()
