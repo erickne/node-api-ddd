@@ -1,6 +1,6 @@
 import { type Controller, type HttpRequest, type HttpResponse } from '../../../protocols'
 import { type Validation } from '../../../protocols/validation'
-import { badRequest, serverError } from '../../../helpers/http/http-helpers'
+import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
 import { type AddSurvey } from '../../../../domain/usecases/add-survey'
 
 export class AddSurveyController implements Controller {
@@ -22,8 +22,7 @@ export class AddSurveyController implements Controller {
         question,
         answers
       })
-      // @ts-expect-error
-      return null
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
