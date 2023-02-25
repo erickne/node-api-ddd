@@ -4,6 +4,8 @@ import {
   type AccountModel,
   type AddAccount,
   type AddAccountModel,
+  type Authentication,
+  type AuthenticationModel,
   type HttpRequest,
   type Validation
 } from './signup-controller-protocols'
@@ -13,6 +15,7 @@ interface SutTypes {
   sut: SignUpController
   addAccountStub: AddAccount
   validationStub: Validation
+  authenticationStub: Authentication
 }
 
 const makeAddAccount = (): AddAccount => {
@@ -24,6 +27,16 @@ const makeAddAccount = (): AddAccount => {
   }
 
   return new AddAccountStub()
+}
+
+const makeAuthentication = (): Authentication => {
+  class AuthenticationStub implements Authentication {
+    async auth (authentication: AuthenticationModel): Promise<string> {
+      return await new Promise(resolve => { resolve('any_token') })
+    }
+  }
+
+  return new AuthenticationStub()
 }
 
 const makeValidation = (): Validation => {
@@ -56,11 +69,13 @@ const makeFakeRequest = (): HttpRequest => ({
 const makeSut = (): SutTypes => {
   const addAccountStub = makeAddAccount()
   const validationStub = makeValidation()
-  const sut = new SignUpController(addAccountStub, validationStub)
+  const authenticationStub = makeAuthentication()
+  const sut = new SignUpController(addAccountStub, validationStub, authenticationStub)
   return {
     sut,
     addAccountStub,
-    validationStub
+    validationStub,
+    authenticationStub
   }
 }
 
