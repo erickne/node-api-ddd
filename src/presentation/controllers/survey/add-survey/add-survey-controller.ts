@@ -1,5 +1,6 @@
 import { type Controller, type HttpRequest, type HttpResponse } from '../../../protocols'
 import { type Validation } from '../../../protocols/validation'
+import { badRequest } from '../../../helpers/http/http-helpers'
 
 export class AddSurveyController implements Controller {
   // private readonly varName: number
@@ -9,7 +10,10 @@ export class AddSurveyController implements Controller {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    this.validation.validate(httpRequest.body)
+    const error = this.validation.validate(httpRequest.body)
+    if (error) {
+      return badRequest(error)
+    }
     // @ts-expect-error
     return await new Promise((resolve, reject) => { resolve(null) })
   }
