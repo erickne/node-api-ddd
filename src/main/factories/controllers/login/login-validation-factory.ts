@@ -1,8 +1,4 @@
-import {
-  EmailValidation,
-  RequiredFieldValidation,
-  ValidationComposite
-} from '../../../../presentation/helpers/validators'
+import { EmailValidation, RequiredFieldValidation, ValidationComposite } from '../../../../validation/validators'
 
 import { type Validation } from '../../../../presentation/protocols/validation'
 
