@@ -12,29 +12,39 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'valid_password'
 })
 
+interface SutTypes {
+  loadAccountByTokenStub: LoadAccountByToken
+  sut: AuthMiddleware
+}
+
+const makeLoadAccountByToken = (): LoadAccountByToken => {
+  class LoadAccountByTokenStub implements LoadAccountByToken {
+    async load (accessToken: string, role?: string): Promise<AccountModel> {
+      return await new Promise((resolve, reject) => { resolve(makeFakeAccount()) })
+    }
+  }
+
+  return new LoadAccountByTokenStub()
+}
+const makeSut = (): SutTypes => {
+  const loadAccountByTokenStub = makeLoadAccountByToken()
+  const sut = new AuthMiddleware(loadAccountByTokenStub)
+  return {
+    loadAccountByTokenStub,
+    sut
+  }
+}
+
 describe('Auth Middleware', () => {
   test('Should return 403 if no x-access-token exists in headers', async () => {
-    class LoadAccountByTokenStub implements LoadAccountByToken {
-      async load (accessToken: string, role?: string): Promise<AccountModel> {
-        return await new Promise((resolve, reject) => { resolve(makeFakeAccount()) })
-      }
-    }
-
-    const loadAccountByTokenStub = new LoadAccountByTokenStub()
-    const sut = new AuthMiddleware(loadAccountByTokenStub)
+    const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
   })
   test('Should call LoadAccountByToken with correct token', async () => {
-    class LoadAccountByTokenStub implements LoadAccountByToken {
-      async load (accessToken: string, role?: string): Promise<AccountModel> {
-        return await new Promise((resolve, reject) => { resolve(makeFakeAccount()) })
-      }
-    }
+    const { sut, loadAccountByTokenStub } = makeSut()
 
-    const loadAccountByTokenStub = new LoadAccountByTokenStub()
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
-    const sut = new AuthMiddleware(loadAccountByTokenStub)
     const httpRequest: HttpRequest = {
       headers: {
         'x-access-token': 'any_token'
