@@ -52,6 +52,7 @@ describe('DbLoadAccountByToken', () => {
     await sut.load('any_token', 'any_role')
     expect(decryptSpy).toHaveBeenCalledWith('any_token')
   })
+
   test('Should return null if decrypter return null', async () => {
     const { decrypterStub, sut } = makeSut()
     jest.spyOn(decrypterStub, 'decrypt')
