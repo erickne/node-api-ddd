@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/erickne/node-api-ddd.svg?branch=master)](https://app.travis-ci.com/erickne/node-api-ddd)
+
 # **Clean Node API**
 
 > ## APIs construídas no treinamento
