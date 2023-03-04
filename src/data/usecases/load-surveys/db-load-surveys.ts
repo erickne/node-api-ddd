@@ -6,8 +6,6 @@ export class DbLoadSurveys implements LoadSurveys {
   constructor (private readonly loadSurveysRepository: LoadSurveysRepository) {}
 
   async load (): Promise<SurveyModel[]> {
-    await this.loadSurveysRepository.loadAll()
-    // @ts-expect-error
-    return await new Promise((resolve, reject) => { resolve(null) })
+    return await this.loadSurveysRepository.loadAll()
   }
 }
