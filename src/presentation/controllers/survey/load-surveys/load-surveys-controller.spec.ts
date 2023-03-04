@@ -2,7 +2,7 @@ import { type SurveyModel } from '../../../../domain/models/survey'
 import { type LoadSurveys } from '../../../../domain/usecases/load-surveys'
 import { LoadSurveysController } from './load-surveys-controller'
 import MockDate from 'mockdate'
-import { ok, serverError } from '../../../helpers/http/http-helpers'
+import { noContent, ok, serverError } from '../../../helpers/http/http-helpers'
 
 interface SutTypes {
   loadSurveyStub: LoadSurveys
@@ -57,6 +57,14 @@ describe('LoadSurvey Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(ok(makeFakeSurvey()))
+  })
+  test('Should return 204 of LoadSurveys returns null', async () => {
+    const { sut, loadSurveyStub } = makeSut()
+    jest.spyOn(loadSurveyStub, 'load')
+      .mockReturnValueOnce(new Promise((resolve, reject) => { resolve([]) }))
+
+    const httpResponse = await sut.handle({})
+    expect(httpResponse).toEqual(noContent())
   })
 
   test('Should throw if LoadSurveyStub throws', async () => {
